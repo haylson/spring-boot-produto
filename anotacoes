@@ -23,4 +23,27 @@ WITH (
 ALTER TABLE produto
   OWNER TO postgres;
 
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 10)
+	private TipoPessoa tipo;
+	
+	Classe Cliente
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	private List<Endereco> enderecos = new ArrayList<>();
+	
+	Classe Endereco
+	@ManyToOne
+	@JoinColumn(name = "cliente_id", nullable = false)
+	private Cliente cliente;
+	
+	---
+	
+	Classe Team
+	@OneToMany(mappedBy = "team", targetEntity = Player.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Player> players;
+	
+	Classe Player
+	@ManyToOne
+	@JoinColumn(name="team_id")
+	private Team team;
 	
