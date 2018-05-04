@@ -5,4 +5,22 @@
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	
 http://utf8-chartable.de/
+
+CREATE TABLE produto ( codigo INTEGER PRIMARY KEY, descricao VARCHAR, marca VARCHAR, preco Decimal, data timestamp );
+
+CREATE TABLE produto
+(
+  codigo integer NOT NULL,
+  descricao character varying,
+  marca character varying,
+  preco numeric,
+  data timestamp without time zone,
+  CONSTRAINT produto_pkey PRIMARY KEY (codigo)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE produto
+  OWNER TO postgres;
+
 	

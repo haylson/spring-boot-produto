@@ -59,13 +59,4 @@ public class ProdutoController {
 		return new ModelAndView("redirect:/");
 	}
 	
-	/*@GetMapping("/")
-	public ModelAndView listarTodos() {
-		
-		ModelAndView mv = new ModelAndView("/listagemProdutos");
-		mv.addObject("produtos", service.findAll());
-		
-		return mv;
-	}*/
-	
 }
