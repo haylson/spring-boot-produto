@@ -23,7 +23,7 @@ public class ProdutoController {
 	
 	//Tela principal do Crud onde sao listados todos os produtos
 	@GetMapping("/")
-	public ModelAndView findAll() {
+	public ModelAndView listarTodos() {
 		
 		ModelAndView mv = new ModelAndView("/listagemProdutos");
 		mv.addObject("produtos", service.findAll());
@@ -31,37 +31,37 @@ public class ProdutoController {
 		return mv;
 	}
 	
-	@GetMapping("/add")
-	public ModelAndView add(Produto produto) {
+	@GetMapping("/adicionar")
+	public ModelAndView adicionar(Produto produto) {
 		ModelAndView mv = new ModelAndView("/cadastroProduto");
 		mv.addObject("produto", produto);
 		return mv;
 	}
 	
 	//Vai para tela de edição de produtos (mesma tela de adição, contudo é enviado para a view um objeto que já existe)
-	@GetMapping("/edit/{id}")
-	public ModelAndView edit(@PathVariable("id") Long id) {
-		return add(service.findOne(id));
+	@GetMapping("/editar/{id}")
+	public ModelAndView editar(@PathVariable("id") Long id) {
+		return adicionar(service.findOne(id));
 	}
 	
-	@GetMapping("/delete/{id}")
-	public ModelAndView delete(@PathVariable("id") Long id) {
+	@GetMapping("/deletar/{id}")
+	public ModelAndView deletar(@PathVariable("id") Long id) {
 		service.delete(id);
-		return findAll();
+		return listarTodos();
 	}
 	
-	@PostMapping("/save")
-	public ModelAndView save(@Valid Produto produto, BindingResult result) {
+	@PostMapping("/salvar")
+	public ModelAndView salvar(@Valid Produto produto, BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return add(produto);
+			return adicionar(produto);
 		}
 		service.save(produto);
-		return findAll();
+		return listarTodos();
 	}
 	
-	@GetMapping("/find/{descricao}")
-	public List<Produto> findByDescricao(String descricao) {
+	@GetMapping("/pesquisar/{descricao}")
+	public List<Produto> pesquisarDescricao(String descricao) {
 		
 		return service.findByDescricao(descricao);
 	}

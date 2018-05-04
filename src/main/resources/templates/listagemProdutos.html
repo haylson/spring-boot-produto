@@ -8,7 +8,6 @@
 	
 	<title>Produtos</title>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="panel panel-default">
@@ -22,7 +21,7 @@
 				    <input type="text" class="form-control input-sm" maxlength="50" placeholder="Pesquise pela Descrição"/>
 				</div>
 				<div class="col-md-2">
-					<a class="btn btn-sm btn-primary" th:href="@{/find/{cafe}}" >Pesquisar</a>
+					<a class="btn btn-sm btn-primary" th:href="@{/pesquisar/{cafe}}" >Pesquisar</a>
 				</div>
 			</div>
 		
@@ -43,12 +42,12 @@
 							<td th:text="${produto.codigo}" align="center"></td>
 							<td th:text="${produto.descricao}" align="center"></td>
 							<td th:text="${produto.marca}" align="center"></td>
-							<td th:text="${produto.preco}" align="center"></td>
+							<td th:text="${produto.preco}" align="center" class="js-moeda"></td>
 							<td th:text="${#dates.format(produto.data, 'dd/MM/yyyy')}" align="center"></td>
 							<td>
 								<div class="btn-group pull-right">
-							   		<a class="btn btn-sm btn-primary" th:href="@{/edit/{id}(id=${produto.codigo})}" >Editar</a>
-							   		<a class="delete btn btn-sm btn-danger" th:href="@{/delete/{id}(id=${produto.codigo})}" >Excluir</a>
+							   		<a class="btn btn-sm btn-primary" th:href="@{/editar/{id}(id=${produto.codigo})}" >Editar</a>
+							   		<a class="delete btn btn-sm btn-danger" th:href="@{/deletar/{id}(id=${produto.codigo})}" >Excluir</a>
 							   </div>
 							</td>
 						</tr>
@@ -57,8 +56,17 @@
 			</div>
 		</div>
 		<div class="panel-footer">
-			<a class="btn btn-sm btn-success" th:href="@{/add/}" >Adicionar</a>
+			<a class="btn btn-sm btn-success" th:href="@{/adicionar/}" >Adicionar</a>
 		</div>
 	</div>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript"src="/javascript/jquery.masknumber.min.js"></script>
+	<script>
+		$('.js-moeda').maskNumber({
+			decimal: ',',
+			thousands: '.'
+		});
+	</script>	
 </body>
 </html>

@@ -24,7 +24,7 @@ public class Produto implements Serializable {
 	private static final long serialVersionUID = -490977659777224232L;
 	
 	@Id
-	@SequenceGenerator(name = "prod_seq", sequenceName = "prod_seq", allocationSize=1)
+	@SequenceGenerator(name = "prod_seq", sequenceName = "prod_seq", allocationSize=1, initialValue=5)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prod_seq")
 	private Long codigo;
 	
@@ -44,7 +44,7 @@ public class Produto implements Serializable {
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull(message = "Data é uma informação obrigatória.")
+	@NotNull(message = "Data é obrigatório.")
 	private Date data;
 
 	public Long getCodigo() {
