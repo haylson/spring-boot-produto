@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 @Entity(name = "produto")
 public class Produto implements Serializable {
@@ -23,7 +24,7 @@ public class Produto implements Serializable {
 	private static final long serialVersionUID = -490977659777224232L;
 	
 	@Id
-	@SequenceGenerator(name = "prod_seq", sequenceName = "prod_seq")
+	@SequenceGenerator(name = "prod_seq", sequenceName = "prod_seq", allocationSize=1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prod_seq")
 	private Long codigo;
 	
@@ -37,6 +38,7 @@ public class Produto implements Serializable {
 	
 	@Column(nullable = false, precision=2)
 	@NotNull(message = "Preço é obrigatório.")
+	@NumberFormat(pattern = "#,##0.00")
 	private BigDecimal preco;
 	
 	@Column(nullable = false)
@@ -84,7 +86,30 @@ public class Produto implements Serializable {
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Produto other = (Produto) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
+	}
 
 }

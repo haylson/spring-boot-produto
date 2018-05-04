@@ -31,7 +31,6 @@ public class ProdutoController {
 		return mv;
 	}
 	
-	//Vai para tela de adição de produtos
 	@GetMapping("/add")
 	public ModelAndView add(Produto produto) {
 		ModelAndView mv = new ModelAndView("/cadastroProduto");
@@ -45,16 +44,12 @@ public class ProdutoController {
 		return add(service.findOne(id));
 	}
 	
-	//Exclui um post por seu ID e redireciona para a tela principal
 	@GetMapping("/delete/{id}")
 	public ModelAndView delete(@PathVariable("id") Long id) {
 		service.delete(id);
 		return findAll();
 	}
 	
-	//Recebe um objeto preenchido do Thymeleaf e valida 
-	//Se tudo estiver ok, salva e volta para tela principal
-	//Se houver erro, retorna para tela atual exibindo as mensagens de erro
 	@PostMapping("/save")
 	public ModelAndView save(@Valid Produto produto, BindingResult result) {
 		

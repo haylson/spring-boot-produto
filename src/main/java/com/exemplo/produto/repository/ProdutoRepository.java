@@ -10,6 +10,6 @@ import com.exemplo.produto.model.Produto;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 	
-	List<Produto> findByDescricaoStartingWith(String descricao);
+	public List<Produto> findByDescricaoContainingIgnoreCase(String descricao);
 	
 }
