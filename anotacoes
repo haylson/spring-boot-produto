@@ -1,9 +1,8 @@
 @SequenceGenerator(name = "prod_seq", sequenceName = "prod_seq")
 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prod_seq")
 
-
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	
-	
+http://utf8-chartable.de/
 	

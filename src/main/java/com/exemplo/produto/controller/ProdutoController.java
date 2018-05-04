@@ -1,7 +1,5 @@
 package com.exemplo.produto.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.exemplo.produto.model.Produto;
+import com.exemplo.produto.repository.filter.ProdutoFilter;
 import com.exemplo.produto.service.ProdutoService;
 
 @Controller
@@ -23,10 +22,10 @@ public class ProdutoController {
 	
 	//Tela principal do Crud onde sao listados todos os produtos
 	@GetMapping("/")
-	public ModelAndView listarTodos() {
+	public ModelAndView listarProdutos(ProdutoFilter produtoFilter) {
 		
 		ModelAndView mv = new ModelAndView("/listagemProdutos");
-		mv.addObject("produtos", service.findAll());
+		mv.addObject("produtos", service.findByDescricao(produtoFilter.getDescricao()));
 		
 		return mv;
 	}
@@ -47,7 +46,7 @@ public class ProdutoController {
 	@GetMapping("/deletar/{id}")
 	public ModelAndView deletar(@PathVariable("id") Long id) {
 		service.delete(id);
-		return listarTodos();
+		return new ModelAndView("redirect:/");
 	}
 	
 	@PostMapping("/salvar")
@@ -57,13 +56,16 @@ public class ProdutoController {
 			return adicionar(produto);
 		}
 		service.save(produto);
-		return listarTodos();
+		return new ModelAndView("redirect:/");
 	}
 	
-	@GetMapping("/pesquisar/{descricao}")
-	public List<Produto> pesquisarDescricao(String descricao) {
+	/*@GetMapping("/")
+	public ModelAndView listarTodos() {
 		
-		return service.findByDescricao(descricao);
-	}
-
+		ModelAndView mv = new ModelAndView("/listagemProdutos");
+		mv.addObject("produtos", service.findAll());
+		
+		return mv;
+	}*/
+	
 }
